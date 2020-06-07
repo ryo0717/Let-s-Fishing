@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 72071d99d00f64d4cafbdaf87e484b43
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - buy: {fileID: 8300000, guid: 45343887b1c8c8542ad5c79454b02806, type: 3}
+  - button: {fileID: 8300000, guid: c73fd560167c07e438982f40482f6548, type: 3}
+  - throw_rod: {fileID: 8300000, guid: 2f5d603b55ee66e47b76a9c2da59f0ec, type: 3}
+  - drop_float: {fileID: 8300000, guid: c969c3148dccc0d49960b4ed22842d8c, type: 3}
+  - fished_success: {fileID: 8300000, guid: cfbc4fa01dffe2a4dbbdb86b778f2d02, type: 3}
+  - fished_failure: {fileID: 8300000, guid: d7ccb19164575de4f8d95f104de1ec7f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

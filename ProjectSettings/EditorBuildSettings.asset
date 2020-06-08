@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Main/Scenes/Title.unity
+    guid: 7f25ba763f7d5ed44bc33ec1ab3ccc89
+  - enabled: 1
+    path: Assets/Main/Scenes/Shop.unity
+    guid: f641c3e955cb1a1468ab19859def026e
+  - enabled: 1
+    path: Assets/Main/Scenes/MapSelect.unity
+    guid: 129153e24457e5f479f965cb2bb79692
+  - enabled: 1
+    path: Assets/Main/Scenes/River fishing.unity
+    guid: 03a441a2a7aeb52418430ad3fb3674fd
   m_configObjects: {}

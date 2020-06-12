@@ -8,7 +8,7 @@ public class Fishing_end : MonoBehaviour
 {
     public GameObject fishend = null;
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
 
     public void MoveTitle(){
         soundmanager.Button();

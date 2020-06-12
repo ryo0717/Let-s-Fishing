@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MoveOuit : MonoBehaviour
 {
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
     public void OnClick(){
         soundmanager.Button();
         

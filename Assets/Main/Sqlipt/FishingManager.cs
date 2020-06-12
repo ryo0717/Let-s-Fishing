@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour
-{
+{ 
     public GameObject point = null;
     public GameObject feed = null;
     public GameObject Mission = null;
@@ -42,13 +42,13 @@ public class FishingManager : MonoBehaviour
 
     public GameObject F_Image;
 
-    List<string> name = new List<string>();
+    List<string> fishname = new List<string>();
     List<int> sell = new List<int>();
     List<int> difficulty = new List<int>();
 
     //Sound
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
 
     void Start()
     {
@@ -81,11 +81,11 @@ public class FishingManager : MonoBehaviour
             n = (string)dr["Name"];
             s = (int)dr["Sell"];
             d = (int)dr["Difficulty"];
-            name.Add(n);
+            fishname.Add(n);
             sell.Add(s);
             difficulty.Add(d);
 
-            // Debug.Log ("Name:" + name + " Sell:" + sell);
+            // Debug.Log ("Name:" + fishname + " Sell:" + sell);
         }
         f_image = F_Image.GetComponent<Image>();
     }
@@ -152,21 +152,21 @@ public class FishingManager : MonoBehaviour
             no_fishing_B.SetActive(true);
             hittime = 300;
             Rand_hit = Random.Range(30,200);
-            index = Random.Range(0, name.Count);
+            index = Random.Range(0, fishname.Count);
 
-            Sprite image = Resources.Load<Sprite>(name[index]);
+            Sprite image = Resources.Load<Sprite>(fishname[index]);
             f_image.sprite = image;
 
 
 
             if(difficulty[index] == 0){
-                Hit_Range = 40;
+                Hit_Range = 100;
             }else if(difficulty[index] == 1){
-                Hit_Range = 30;
+                Hit_Range = 100;
             }else if(difficulty[index] == 2){
-                Hit_Range = 25;
+                Hit_Range = 100;
             }else if(difficulty[index] == 3){
-                Hit_Range = 10;
+                Hit_Range = 100;
             }else{
                 Hit_Range = 5;
             }
@@ -179,10 +179,10 @@ public class FishingManager : MonoBehaviour
             //sound
             soundmanager.Success();
             imagetime = 100;
-            if(name[index] == target){
+            if(fishname[index] == target){
                 target_num += 1;
             }
-            Debug.Log (name[index]);
+            Debug.Log (fishname[index]);
             point_num += sell[index];
         }else{
             //sound

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MoveContinue : MonoBehaviour
 {
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
     // Start is called before the first frame update
     public void OnClick(){
         soundmanager.Button();

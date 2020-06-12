@@ -17,7 +17,7 @@ public class ShopManager : MonoBehaviour
     public string mission = " ";
 
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
 
     //ミッション
     int M_num = 0;

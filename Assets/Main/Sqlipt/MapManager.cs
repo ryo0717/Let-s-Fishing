@@ -45,7 +45,7 @@ public class MapManager : MonoBehaviour
     public int target_num = 0;
 
     [SerializeField] 
-    private SoundManager soundmanager;
+    private SoundManager soundmanager = null;
     // Start is called before the first frame update
     void Start()
     {

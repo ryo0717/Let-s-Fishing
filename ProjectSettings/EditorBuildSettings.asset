@@ -17,4 +17,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main/Scenes/River fishing.unity
     guid: 03a441a2a7aeb52418430ad3fb3674fd
+  - enabled: 1
+    path: Assets/Main/Scenes/Coast fishing.unity
+    guid: dc6f32b14b9cb9340ad944217b4641eb
+  - enabled: 1
+    path: Assets/Main/Scenes/Coast fishing 1.unity
+    guid: cecf14fc5e087304d9adbceb153a07ce
+  - enabled: 1
+    path: Assets/Main/Scenes/Coast fishing 2.unity
+    guid: a816b679f459089448aa52b48b44a6ce
+  - enabled: 1
+    path: Assets/Main/Scenes/Lake fishing.unity
+    guid: 7f417adefdd1c504f87cf4afbc89143b
+  - enabled: 1
+    path: Assets/Main/Scenes/Boat fishing.unity
+    guid: 457387d3bfbabd04391a6ab20736a423
   m_configObjects: {}

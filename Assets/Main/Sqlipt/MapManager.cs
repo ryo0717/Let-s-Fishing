@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//マップの処理を管理するプログラム
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    //マップ
     //place
+    //カメラ
     public GameObject Camera = null;
+    //海岸1
     public GameObject Coast1 = null;
+    //海岸2
     public GameObject Coast2 = null;
+    //海岸3
     public GameObject Coast3 = null;
+    //川
     public GameObject River = null;
+    //船
     public GameObject Boat = null;
+    //湖
     public GameObject Lake = null;
+
     //地方
     public GameObject B = null;
     public GameObject C = null;
@@ -24,6 +32,7 @@ public class MapManager : MonoBehaviour
     public GameObject G = null;
     public GameObject H = null;
 
+//Position
     Vector3 C_pos ;
     Vector3 Coast1_pos ;
     Vector3 Coast2_pos ;
@@ -31,11 +40,14 @@ public class MapManager : MonoBehaviour
     Vector3 River_pos ;
     Vector3 Boat_pos ;
     Vector3 Lake_pos ;
+    //現在のStage数
     public string stage = "";
 
-//アイテム
+    //プレイヤーポイント数
     public GameObject point = null;
+    //プレイヤー餌数
     public GameObject feed = null;
+    //プレイヤーミッション数
     public GameObject Mission = null;
     public int point_num = 0;
     public int feed_num = 0;
@@ -45,11 +57,11 @@ public class MapManager : MonoBehaviour
     public int target_num = 0;
 
     [SerializeField] 
-    private SoundManager soundmanager = null;
+    private SoundManager sound_manager = null;
     // Start is called before the first frame update
     void Start()
     {
-        //マップ
+        //マップPosition
         C_pos = Camera.transform.position;
         Coast1_pos = Coast1.transform.position;
         Coast2_pos = Coast2.transform.position;
@@ -58,11 +70,11 @@ public class MapManager : MonoBehaviour
         Boat_pos = Boat.transform.position;
         Lake_pos = Lake.transform.position;
 
+        //ステージ数の初期化
         stage = PlayerPrefs.GetString("STAGE","A");
         place = PlayerPrefs.GetInt("PLACE",0);
 
-//アイテム
-//ポイントとエサをDBから入力
+        //ポイントとエサとミッションをDBから入力
         point_num = PlayerPrefs.GetInt("POINT",100);
         feed_num = PlayerPrefs.GetInt("FEED",0);
         mission = PlayerPrefs.GetString("MISSION","");
@@ -81,6 +93,8 @@ public class MapManager : MonoBehaviour
         River.transform.position = River_pos;
         Boat.transform.position = Boat_pos;
         Lake.transform.position = Lake_pos;
+
+        //Playerのミッション数に応じて移動できる場所を解放する
 
         if(mission_num > 1){
             Coast1.SetActive(true);
@@ -113,7 +127,6 @@ public class MapManager : MonoBehaviour
 
         
 
-//アイテム
 //画面に反映
         Text P_text = point.GetComponent<Text> ();
         P_text.text = point_num + "p";
@@ -124,9 +137,11 @@ public class MapManager : MonoBehaviour
 
         
     }
+    //地方ごとの表示処理
+    //A地方の場合
     public void MoveA(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "A";
         C_pos.x = -78f;
         C_pos.y = -78f;
@@ -150,9 +165,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //B地方の場合
     public void MoveB(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "B";
         C_pos.x = -55f;
         C_pos.y = -57f;
@@ -176,9 +192,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //C地方の場合
     public void MoveC(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "C";
         C_pos.x = -25f;
         C_pos.y = -47f;
@@ -202,9 +219,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 50f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //D地方場合
     public void MoveD(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "D";
         C_pos.x = -6f;
         C_pos.y = -34f;
@@ -228,9 +246,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //E地方の場合
     public void MoveE(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "E";
         C_pos.x = 12f;
         C_pos.y = -33f;
@@ -254,9 +273,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //F地方の場合
     public void MoveF(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "F";
         C_pos.x = 28f;
         C_pos.y = 14f;
@@ -280,9 +300,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //G地方の場合
     public void MoveG(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "G";
         C_pos.x = -25f;
         C_pos.y = -89f;
@@ -306,9 +327,10 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //H地方の場合
     public void MoveH(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         stage = "H";
         C_pos.x = 49f;
         C_pos.y = 75f;
@@ -332,39 +354,44 @@ public class MapManager : MonoBehaviour
         Lake_pos.y = 500f + 295.5f;
         Lake_pos.z = 0f;
     }
+    //画面遷移
+    //海岸に移動
     public void MoveCoast(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 1;
         SceneManager.LoadScene("Coast fishing");
     }
     public void MoveCoast1(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 2;
         SceneManager.LoadScene("Coast fishing 1");
     }
     public void MoveCoast2(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 3;
         SceneManager.LoadScene("Coast fishing 2");
     }
+    //川に移動
     public void MoveRiver(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 0;
         SceneManager.LoadScene("River fishing");
     }
+    //湖に移動
     public void MoveLake(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 4;
         SceneManager.LoadScene("Lake fishing");
     }
+    //船に移動
     public void MoveBoat(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
         place = 5;
         SceneManager.LoadScene("Boat fishing");
     }

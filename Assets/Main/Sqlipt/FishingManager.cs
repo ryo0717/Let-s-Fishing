@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//釣りの処理を管理するプログラム
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,54 +9,72 @@ public class FishingManager : MonoBehaviour
     public GameObject point = null;
     public GameObject feed = null;
     public GameObject Mission = null;
+    //ポイント数
     public int point_num = 0;
+    //餌数
     public int feed_num = 0;
+    //ミッション名
     public string mission = " ";
+    //ミッション数
     public int mission_num = 0;
+    //ミッションターゲット数
     public int target_num = 0;
+    //ミッションターゲット名
     public string target = " ";
     //場所番号
     public int place = 0;
     //ステージ番号
     public string stage = "";
-    private int imagetime = 0;
+    //魚を表示する時間
+    private int image_time = 0;
 
     //hitタイミング
-    private int index = 0;
-    private int hittime = 0; 
+    //魚の配列番号
+    private int fish_index = 0;
+    //釣り時間
+    private int hit_time = 0; 
+    //魚がいつhitするかの変数
     private int Rand_hit = 0;
+    //魚がhitしている時間の長さ
     private int Hit_Range = 0;
-    private bool hit = false;
-
-    public GameObject hitter = null;
+    //魚がhitしているか
+    private bool is_hit = false;
 
     //GameObject
 
+    //画面に表示されるHitの文字
+    public GameObject hitter = null;
+    //釣り竿
     public GameObject rod = null;
+    //浮き
     public GameObject flo = null;
-    public GameObject fishing_B = null;
-    public GameObject no_fishing_B = null;
-
+    //釣りをするボタン
+    public GameObject fishing_Btn = null;
+    //釣りあげるボタン
+    public GameObject no_fishing_Btn = null;
+    //釣りメニュー
     public GameObject fishend = null;
-    //Image
-    private Image f_image;
+    //魚の画像object
+    public GameObject fish_obj;
 
-    public GameObject F_Image;
-
-    List<string> fishname = new List<string>();
-    List<int> sell = new List<int>();
+    //List
+    
+    //fish_nameの配列
+    List<string> fish_name = new List<string>();
+    //魚の獲得pointの配列
+    List<int> fish_point = new List<int>();
+    //魚の釣れる難易度の配列
     List<int> difficulty = new List<int>();
+
+    //魚の画像
+    private Image fish_image;
 
     //Sound
     [SerializeField] 
-    private SoundManager soundmanager = null;
+    private SoundManager sound_manager = null;
 
     void Start()
     {
-        
-        
-            // strList.Add("Samurai");
-            // strList.Add("Engineer");
 
         //ポイントとエサをDBから入力
         point_num = PlayerPrefs.GetInt("POINT",100);
@@ -69,7 +88,6 @@ public class FishingManager : MonoBehaviour
 
 
         //DB
-
         SqliteDatabase sqlDB = new SqliteDatabase("FishGame.db");
         string query = "select Name,Sell,Difficulty from Fish_Mst where " + stage + "=1 and Place = " + place.ToString();
         DataTable dataTable = sqlDB.ExecuteQuery(query);
@@ -81,13 +99,11 @@ public class FishingManager : MonoBehaviour
             n = (string)dr["Name"];
             s = (int)dr["Sell"];
             d = (int)dr["Difficulty"];
-            fishname.Add(n);
-            sell.Add(s);
+            fish_name.Add(n);
+            fish_point.Add(s);
             difficulty.Add(d);
-
-            // Debug.Log ("Name:" + fishname + " Sell:" + sell);
         }
-        f_image = F_Image.GetComponent<Image>();
+        fish_image = fish_obj.GetComponent<Image>();
     }
 
     void Update()
@@ -100,27 +116,34 @@ public class FishingManager : MonoBehaviour
         Text M_text = Mission.GetComponent<Text>();
         M_text.text = "ミッション：" + mission + "匹 現在" + target_num + "匹";
 
-        //hittime
-        if(hittime > 0){
-            if(Rand_hit > hittime && Rand_hit-Hit_Range < hittime){
+        //釣りをしている間
+        if(hit_time > 0){
+            //魚がHitした場合
+            if(Rand_hit > hit_time && Rand_hit-Hit_Range < hit_time){
+                //Hit文字を表示
                 hitter.SetActive(true);
-                hit = true;
+                //魚がHitしている
+                is_hit = true;
             }else{
+                //Hit文字を非表示
                 hitter.SetActive(false);
-                hit = false;
+                //魚がHitしていない
+                is_hit = false;
             }
-            hittime -= 1;
-            //Debug.Log ("hittime:" + hittime + " Rand_hit:" + Rand_hit);
+            //釣り時間経過
+            hit_time -= 1;
         }
 
-        if(imagetime > 0){
-            F_Image.SetActive(true);
-            imagetime -= 1;
+        //魚の画像表示処理
+        if(image_time > 0){
+            //魚の画像表示
+            fish_obj.SetActive(true);
+            //表示時間経過
+            image_time -= 1;
         }else{
-            F_Image.SetActive(false);
+            //魚の画像非表示
+            fish_obj.SetActive(false);
         }
-
-        //Debug.Log (target);
     }
     void OnDestroy(){
         // ポイントとえさの数を保存
@@ -135,64 +158,84 @@ public class FishingManager : MonoBehaviour
     }
     public void act_end(){
          //sound
-        soundmanager.Button();
+        sound_manager.Button();
+        //釣りメニュー表示
         fishend.SetActive(true);
     }
+    //釣りをする処理
     public void fishing(){
         
         if(feed_num > 0){
             //sound
-            soundmanager.Rod();
-            soundmanager.Float();
-            //feed
+            sound_manager.Rod();
+            sound_manager.Float();
+            //餌を消費
             feed_num -= 1;
+            //竿を表示
             rod.SetActive(true);
+            //浮きの表示
             flo.SetActive(true);
-            fishing_B.SetActive(false);
-            no_fishing_B.SetActive(true);
-            hittime = 300;
-            Rand_hit = Random.Range(30,200);
-            index = Random.Range(0, fishname.Count);
+            //釣りをするボタンの非表示
+            fishing_Btn.SetActive(false);
+            //釣りあげるボタンの表示
+            no_fishing_Btn.SetActive(true);
+            //釣りをする時間の設定
+            hit_time = 500;
+            //魚がHitするタイミングをランダムで決める
+            Rand_hit = Random.Range(100,400);
+            //どの魚が釣れるかランダムで決める
+            fish_index = Random.Range(0, fish_name.Count);
+            //魚の画像をセット
+            Sprite spr_image = Resources.Load<Sprite>(fish_name[fish_index]);
+            fish_image.sprite = spr_image;
 
-            Sprite image = Resources.Load<Sprite>(fishname[index]);
-            f_image.sprite = image;
-
-
-
-            if(difficulty[index] == 0){
+            //釣れる難易度の判定
+            if(difficulty[fish_index] == 0){
                 Hit_Range = 100;
-            }else if(difficulty[index] == 1){
-                Hit_Range = 100;
-            }else if(difficulty[index] == 2){
-                Hit_Range = 100;
-            }else if(difficulty[index] == 3){
-                Hit_Range = 100;
+            }else if(difficulty[fish_index] == 1){
+                Hit_Range = 90;
+            }else if(difficulty[fish_index] == 2){
+                Hit_Range = 80;
+            }else if(difficulty[fish_index] == 3){
+                Hit_Range = 70;
             }else{
-                Hit_Range = 5;
+                Hit_Range = 60;
             }
             
         }
     }
+    //釣り上げる処理
     public void no_fishing(){
-        //釣れた場合のみ
-        if(hit == true){
+        //釣れた場合の処理
+        if(is_hit){
             //sound
-            soundmanager.Success();
-            imagetime = 100;
-            if(fishname[index] == target){
+            sound_manager.Success();
+            //魚の表示時間の設定
+            image_time = 100;
+            //ミッションのターゲットであればカウントする
+            if(fish_name[fish_index] == target){
                 target_num += 1;
             }
-            Debug.Log (fishname[index]);
-            point_num += sell[index];
+            //釣り上げた魚のポイントを獲得
+            point_num += fish_point[fish_index];
+
+        //釣れなかった場合の処理
         }else{
             //sound
-            soundmanager.Failure();
+            sound_manager.Failure();
         }
-        hittime = 0;
+
+        //釣りをする時間の初期化
+        hit_time = 0;
+        //竿の非表示
         rod.SetActive(false);
+        //浮きの非表示
         flo.SetActive(false);
-        fishing_B.SetActive(true);
-        no_fishing_B.SetActive(false);
+        //釣りをするボタンの表示
+        fishing_Btn.SetActive(true);
+        //釣り上げるボタンの非表示
+        no_fishing_Btn.SetActive(false);
+        //Hit文字の非表示
         hitter.SetActive(false);
         
     }

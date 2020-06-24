@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 519591609}
   - component: {fileID: 519591608}
   m_Layer: 5
-  m_Name: Fishing_B
+  m_Name: Fishing_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 942805607}
   - component: {fileID: 942805606}
   m_Layer: 5
-  m_Name: no_Fishing_B
+  m_Name: no_Fishing_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3022,6 +3022,26 @@ PrefabInstance:
       propertyPath: F_Image
       value: 
       objectReference: {fileID: 379652382}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: sound_manager
+      value: 
+      objectReference: {fileID: 383888140}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fishing_Btn
+      value: 
+      objectReference: {fileID: 519591607}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: no_fishing_Btn
+      value: 
+      objectReference: {fileID: 942805604}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fish_obj
+      value: 
+      objectReference: {fileID: 379652382}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d0886af34bf2143b92e15068434cff, type: 3}
 --- !u!114 &1591700616 stripped
@@ -3898,6 +3918,11 @@ PrefabInstance:
     - target: {fileID: 3466449707364007965, guid: 03f4a6d679e06f04696c1b4c2ccaf154,
         type: 3}
       propertyPath: soundmanager
+      value: 
+      objectReference: {fileID: 383888140}
+    - target: {fileID: 3466449707364007965, guid: 03f4a6d679e06f04696c1b4c2ccaf154,
+        type: 3}
+      propertyPath: sound_manager
       value: 
       objectReference: {fileID: 383888140}
     - target: {fileID: 3466449707364007966, guid: 03f4a6d679e06f04696c1b4c2ccaf154,

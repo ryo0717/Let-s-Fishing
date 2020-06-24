@@ -1175,6 +1175,26 @@ PrefabInstance:
       propertyPath: soundmanager
       value: 
       objectReference: {fileID: 1914372445}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fishing_Btn
+      value: 
+      objectReference: {fileID: 826993765}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: no_fishing_Btn
+      value: 
+      objectReference: {fileID: 826993763}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fish_obj
+      value: 
+      objectReference: {fileID: 826993761}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: sound_manager
+      value: 
+      objectReference: {fileID: 1914372445}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d0886af34bf2143b92e15068434cff, type: 3}
 --- !u!114 &766634484 stripped
@@ -1282,6 +1302,11 @@ PrefabInstance:
     - target: {fileID: 4574008229564042019, guid: efd41271d0fd13348b6cb4dbed85d96a,
         type: 3}
       propertyPath: soundmanager
+      value: 
+      objectReference: {fileID: 1914372445}
+    - target: {fileID: 4574008229564042019, guid: efd41271d0fd13348b6cb4dbed85d96a,
+        type: 3}
+      propertyPath: sound_manager
       value: 
       objectReference: {fileID: 1914372445}
     - target: {fileID: 5089377918383822056, guid: efd41271d0fd13348b6cb4dbed85d96a,

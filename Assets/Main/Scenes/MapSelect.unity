@@ -271,7 +271,7 @@ MonoBehaviour:
   mission: ' '
   mission_num: 0
   target_num: 0
-  soundmanager: {fileID: 380750555}
+  sound_manager: {fileID: 380750555}
 --- !u!4 &31235153
 Transform:
   m_ObjectHideFlags: 0

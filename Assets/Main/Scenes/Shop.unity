@@ -1930,7 +1930,7 @@ MonoBehaviour:
   target_num: 0
   target: ' '
   mission: ' '
-  soundmanager: {fileID: 157982282}
+  sound_manager: {fileID: 157982282}
 --- !u!4 &1498808449
 Transform:
   m_ObjectHideFlags: 0

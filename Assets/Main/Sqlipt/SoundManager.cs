@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Soundを管理するプログラム
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,28 +23,28 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad (this);
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
+    //Bottonが押された時のSound
     public void Button(){
         audioSource.PlayOneShot(button);
     }
+    //Shopで購入した時のSound
     public void Buy(){
         audioSource.PlayOneShot(buy);
     }
+    //釣り竿を投げた時のSound
     public void Rod(){
         audioSource.PlayOneShot(throw_rod);
     }
+    //浮きが着水した時のSound
     public void Float(){
         audioSource.PlayOneShot(drop_float);
     }
+    //魚が釣れた時のSound
     public void Success(){
         audioSource.PlayOneShot(fished_success);
     }
+    //魚が釣れなかった時のSound
     public void Failure(){
         audioSource.PlayOneShot(fished_failure);
     }

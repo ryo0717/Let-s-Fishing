@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿//UserDateの処理
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UserData : MonoBehaviour
 {
+    //プレイヤーのポイント数
     public int point_num = 0;
+    //プレイヤーの餌数
     public int feed_num = 0;
+    //プレイヤーのミッション数
     public int mission_num = 0;
     // Start is called before the first frame update
     void Start()
@@ -20,11 +24,5 @@ public class UserData : MonoBehaviour
         PlayerPrefs.SetInt ("FEED", feed_num);
         PlayerPrefs.SetInt ("MISSION", mission_num);
         PlayerPrefs.Save ();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log(point_num);
     }
 }

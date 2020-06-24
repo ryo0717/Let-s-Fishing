@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//ショップの処理を管理するプログラム
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
+    //プレイヤーが所持しているポイント数
     public GameObject point = null;
+    //プレイヤーが所持している餌数
     public GameObject feed = null;
+    //プレイヤーが進行中のミッション
     public GameObject Mission = null;
+
     public int point_num = 0;
     public int feed_num = 0;
     public int mission_num = 0;
@@ -17,7 +22,7 @@ public class ShopManager : MonoBehaviour
     public string mission = " ";
 
     [SerializeField] 
-    private SoundManager soundmanager = null;
+    private SoundManager sound_manager = null;
 
     //ミッション
     int M_num = 0;
@@ -27,7 +32,7 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ポイントとエサをDBから入力
+        //ポイントとエサとミッションをDBから入力
         point_num = PlayerPrefs.GetInt("POINT",100);
         feed_num = PlayerPrefs.GetInt("FEED",10);
         mission = PlayerPrefs.GetString("MISSION","");
@@ -35,9 +40,10 @@ public class ShopManager : MonoBehaviour
         target = PlayerPrefs.GetString("TARGET","");
         target_num = PlayerPrefs.GetInt("TARGET_NUM",0);
 
+        //DB読み込み
         ReadDB();
 
-        
+        //ミッションの切り替え処理
         if(target_num >= M_need){
             point_num += M_reward;
             mission_num += 1;
@@ -64,29 +70,29 @@ public class ShopManager : MonoBehaviour
     //えさの購入
     public void buyfeed(){
         if(point_num >= 5){
-            soundmanager.Buy();
+            sound_manager.Buy();
             point_num -= 5; 
             feed_num += 1;
         }
     }
-    //ルアーの購入
+    //ルアーの購入（未実装）
     public void buylure(){
         if(point_num >= 150){
-            soundmanager.Buy();
+            sound_manager.Buy();
             //point_num -= 150; 
         }
     }
-    //リールの購入
+    //リールの購入（未実装）
     public void buyreel(){
         if(point_num >= 150){
-            soundmanager.Buy();
+            sound_manager.Buy();
             //point_num -= 150; 
         }
     }
-    //つりざおの購入
+    //つりざおの購入（未実装）
     public void buyrod(){
         if(point_num >= 200){
-            soundmanager.Buy();
+            sound_manager.Buy();
             //point_num -= 200;
         }
     }
@@ -101,9 +107,10 @@ public class ShopManager : MonoBehaviour
         PlayerPrefs.Save ();
     }
     public void MoveMap(){
-        soundmanager.Button();
+        sound_manager.Button();
         SceneManager.LoadScene("MapSelect");
     }
+    //DBの読み込み
     private void ReadDB(){
         SqliteDatabase sqlDB = new SqliteDatabase("FishGame.db");
         string query = "select * from Mission_Mst where Number = " + mission_num;

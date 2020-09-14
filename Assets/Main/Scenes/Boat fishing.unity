@@ -859,6 +859,21 @@ PrefabInstance:
       propertyPath: fish_obj
       value: 
       objectReference: {fileID: 1747212069}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: mission
+      value: 
+      objectReference: {fileID: 2078317561}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fishing_btn
+      value: 
+      objectReference: {fileID: 644397413}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: no_fishing_btn
+      value: 
+      objectReference: {fileID: 1453238163}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d0886af34bf2143b92e15068434cff, type: 3}
 --- !u!1 &1563412717 stripped

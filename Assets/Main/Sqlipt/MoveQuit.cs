@@ -1,13 +1,10 @@
 ﻿//ゲーム終了処理
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MoveQuit : MonoBehaviour
 {
     [SerializeField] 
-    private SoundManager sound_manager = null;
+    public SoundManager sound_manager = null;
     //「Quit」BottonをClickした時の処理
     public void OnClick(){
         //Soundを流す
@@ -15,8 +12,6 @@ public class MoveQuit : MonoBehaviour
         //Quit処理
         #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
-		#elif UNITY_WEBPLAYER
-		Application.OpenURL("http://www.yahoo.co.jp/");
 		#else
 		Application.Quit();
 		#endif

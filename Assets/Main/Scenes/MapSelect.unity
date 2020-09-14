@@ -247,28 +247,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab0f19c1c853df4896ed0e71b040d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 1357709910}
-  Coast1: {fileID: 576997583}
-  Coast2: {fileID: 576997582}
-  Coast3: {fileID: 576997581}
-  River: {fileID: 576997580}
-  Boat: {fileID: 576997579}
-  Lake: {fileID: 576997578}
-  B: {fileID: 1975467655}
-  C: {fileID: 1975467654}
-  D: {fileID: 1975467653}
-  E: {fileID: 1975467652}
-  F: {fileID: 1975467651}
-  G: {fileID: 1975467650}
-  H: {fileID: 1975467649}
+  cam: {fileID: 1357709910}
+  coast_first: {fileID: 576997583}
+  coast_second: {fileID: 576997582}
+  coast_third: {fileID: 576997581}
+  river: {fileID: 576997580}
+  boat: {fileID: 576997579}
+  lake: {fileID: 576997578}
+  place_parent: {fileID: 1975467656}
+  chugoku_sikoku: {fileID: 1975467655}
+  kinki: {fileID: 1975467654}
+  chubu: {fileID: 1975467653}
+  kanto: {fileID: 1975467652}
+  tohoku: {fileID: 1975467651}
+  okinawa: {fileID: 1975467650}
+  hokkaido: {fileID: 1975467649}
   stage: 
   point: {fileID: 939811525}
   feed: {fileID: 939811524}
-  Mission: {fileID: 939811523}
+  mission: {fileID: 939811523}
   point_num: 0
   feed_num: 0
   place: 0
-  mission: ' '
+  mission_name: ' '
   mission_num: 0
   target_num: 0
   sound_manager: {fileID: 380750555}
@@ -509,6 +510,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4043715677747125905, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: river
+      objectReference: {fileID: 0}
     - target: {fileID: 4043715677747125907, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -527,7 +533,17 @@ PrefabInstance:
     - target: {fileID: 4043715677845484624, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCoast2
+      value: MoveCoastThird
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043715677845484638, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: coast third
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043715678265410421, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: lake
       objectReference: {fileID: 0}
     - target: {fileID: 4043715678265410423, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
@@ -539,6 +555,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MoveLake
       objectReference: {fileID: 0}
+    - target: {fileID: 4043715678804622523, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: coast second
+      objectReference: {fileID: 0}
     - target: {fileID: 4043715678804622525, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -547,7 +568,12 @@ PrefabInstance:
     - target: {fileID: 4043715678804622525, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCoast1
+      value: MoveCoastSecond
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043715678872481492, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: coast first
       objectReference: {fileID: 0}
     - target: {fileID: 4043715678872481494, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
@@ -557,7 +583,7 @@ PrefabInstance:
     - target: {fileID: 4043715678872481494, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCoast
+      value: MoveCoastFirst
       objectReference: {fileID: 0}
     - target: {fileID: 4043715679368516456, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
@@ -568,6 +594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MoveBoat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043715679368516470, guid: baf9849cb7c1b054485f3b61e2917807,
+        type: 3}
+      propertyPath: m_Name
+      value: boat
       objectReference: {fileID: 0}
     - target: {fileID: 4043715679382543954, guid: baf9849cb7c1b054485f3b61e2917807,
         type: 3}
@@ -1051,6 +1082,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 171586673240512405, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: chugoku_sikoku
+      objectReference: {fileID: 0}
     - target: {fileID: 1270060420887413952, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1074,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 1270060420887413952, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveD
+      value: Move_chubu
       objectReference: {fileID: 0}
     - target: {fileID: 1270060420887413952, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1219,7 +1255,7 @@ PrefabInstance:
     - target: {fileID: 1599490333639886367, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveB
+      value: Move_chugoku_sikoku
       objectReference: {fileID: 0}
     - target: {fileID: 1599490333639886367, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1249,7 +1285,7 @@ PrefabInstance:
     - target: {fileID: 1658431534101677677, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveE
+      value: Move_kanto
       objectReference: {fileID: 0}
     - target: {fileID: 1658431534101677677, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1279,7 +1315,7 @@ PrefabInstance:
     - target: {fileID: 1739066748568302638, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveC
+      value: Move_kinki
       objectReference: {fileID: 0}
     - target: {fileID: 1739066748568302638, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1295,6 +1331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495372286781745049, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: tohoku
       objectReference: {fileID: 0}
     - target: {fileID: 3268871145748699288, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1324,7 +1365,7 @@ PrefabInstance:
     - target: {fileID: 3698630713945912355, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveF
+      value: Move_tohoku
       objectReference: {fileID: 0}
     - target: {fileID: 3698630713945912355, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1336,10 +1377,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4268942483570170440, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: chubu
+      objectReference: {fileID: 0}
     - target: {fileID: 4407603761170546060, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407603761170546060, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: kanto
       objectReference: {fileID: 0}
     - target: {fileID: 4444644705457807372, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1364,7 +1415,7 @@ PrefabInstance:
     - target: {fileID: 4444644705457807372, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveH
+      value: Move_hokkaido
       objectReference: {fileID: 0}
     - target: {fileID: 4444644705457807372, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1414,7 +1465,7 @@ PrefabInstance:
     - target: {fileID: 5368556022701032613, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveA
+      value: Move_kyushu
       objectReference: {fileID: 0}
     - target: {fileID: 5368556022701032613, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1444,7 +1495,7 @@ PrefabInstance:
     - target: {fileID: 5592577467535037097, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveG
+      value: Move_okinawa
       objectReference: {fileID: 0}
     - target: {fileID: 5592577467535037097, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1456,6 +1507,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5614050592182751815, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: hokkaido
+      objectReference: {fileID: 0}
     - target: {fileID: 6251100818675936892, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1466,15 +1522,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6586206754911690906, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: kinki
+      objectReference: {fileID: 0}
     - target: {fileID: 6998503251650774684, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_Name
       value: StageSelect
       objectReference: {fileID: 0}
+    - target: {fileID: 7973168911833100514, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: kyushu
+      objectReference: {fileID: 0}
     - target: {fileID: 8322704895750582837, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322704895750582837, guid: 1dd5ca1ec22748548ab289c7414029f6,
+        type: 3}
+      propertyPath: m_Name
+      value: okinawa
       objectReference: {fileID: 0}
     - target: {fileID: 9101558002356553972, guid: 1dd5ca1ec22748548ab289c7414029f6,
         type: 3}
@@ -1522,6 +1593,12 @@ GameObject:
 --- !u!1 &1975467655 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 171586673240512405, guid: 1dd5ca1ec22748548ab289c7414029f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975467648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1975467656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6998503251650774684, guid: 1dd5ca1ec22748548ab289c7414029f6,
     type: 3}
   m_PrefabInstance: {fileID: 1975467648}
   m_PrefabAsset: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1534828813404031579}
   - component: {fileID: 1534828813404031578}
   m_Layer: 5
-  m_Name: No_Fishing_Btn
+  m_Name: no_fishing_btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 1534828813894094469}
   - component: {fileID: 1534828813894094468}
   m_Layer: 5
-  m_Name: Fishing_Btn
+  m_Name: fishing_btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 5089377919700314699}
   - component: {fileID: 5089377919700314696}
   m_Layer: 5
-  m_Name: "\u7D42\u4E86"
+  m_Name: finish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

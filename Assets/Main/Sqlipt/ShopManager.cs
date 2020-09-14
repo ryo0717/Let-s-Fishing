@@ -1,6 +1,4 @@
 ﻿//ショップの処理を管理するプログラム
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -12,30 +10,30 @@ public class ShopManager : MonoBehaviour
     //プレイヤーが所持している餌数
     public GameObject feed = null;
     //プレイヤーが進行中のミッション
-    public GameObject Mission = null;
+    public GameObject mission = null;
 
     public int point_num = 0;
     public int feed_num = 0;
     public int mission_num = 0;
     public int target_num = 0;
     public string target = " ";
-    public string mission = " ";
+    public string mission_name = " ";
 
     [SerializeField] 
-    private SoundManager sound_manager = null;
+    public SoundManager sound_manager = null;
 
     //ミッション
-    int M_num = 0;
-    string M_name = "";
-    int M_need = 0;
-    int M_reward = 0;
+    int m_num = 0;
+    string m_name = "";
+    int m_need = 0;
+    int m_reward = 0;
     // Start is called before the first frame update
     void Start()
     {
         //ポイントとエサとミッションをDBから入力
         point_num = PlayerPrefs.GetInt("POINT",100);
         feed_num = PlayerPrefs.GetInt("FEED",10);
-        mission = PlayerPrefs.GetString("MISSION","");
+        mission_name = PlayerPrefs.GetString("MISSION","");
         mission_num = PlayerPrefs.GetInt("MISSION_NUM",1);
         target = PlayerPrefs.GetString("TARGET","");
         target_num = PlayerPrefs.GetInt("TARGET_NUM",0);
@@ -44,27 +42,27 @@ public class ShopManager : MonoBehaviour
         ReadDB();
 
         //ミッションの切り替え処理
-        if(target_num >= M_need){
-            point_num += M_reward;
+        if(target_num >= m_need){
+            point_num += m_reward;
             mission_num += 1;
             target_num = 0;
             ReadDB();
         }
-        target = M_name;
+        target = m_name;
 
-        mission = M_name + M_need; 
+        mission_name = m_name + m_need; 
     }
 
     // Update is called once per frame
     void Update()
     {
         //画面に反映
-        Text P_text = point.GetComponent<Text> ();
-        P_text.text = point_num + "p";
-        Text F_text = feed.GetComponent<Text> ();
-        F_text.text = feed_num.ToString();
-        Text M_text = Mission.GetComponent<Text>();
-        M_text.text = "ミッション：" + mission + "匹 現在" + target_num + "匹";
+        Text p_text = point.GetComponent<Text> ();
+        p_text.text = point_num + "p";
+        Text f_text = feed.GetComponent<Text> ();
+        f_text.text = feed_num.ToString();
+        Text m_text = mission.GetComponent<Text>();
+        m_text.text = "ミッション：" + mission_name + "匹 現在" + target_num + "匹";
         
     }
     //えさの購入
@@ -100,7 +98,7 @@ public class ShopManager : MonoBehaviour
         // ポイントとえさの数を保存
         PlayerPrefs.SetInt ("POINT", point_num);
         PlayerPrefs.SetInt ("FEED", feed_num);
-        PlayerPrefs.SetString("MISSION",mission);
+        PlayerPrefs.SetString("MISSION",mission_name);
         PlayerPrefs.SetInt ("MISSION_NUM", mission_num);
         PlayerPrefs.SetString("TARGET",target);
         PlayerPrefs.SetInt("TARGET_NUM",target_num);
@@ -118,11 +116,10 @@ public class ShopManager : MonoBehaviour
 
         
         foreach(DataRow dr in dataTable.Rows){
-            M_num = (int)dr["Number"];
-            M_name = (string)dr["Name"];
-            M_need = (int)dr["Need"];
-            M_reward = (int)dr["Reward"];
-            // Debug.Log ("Name:" + name + " Sell:" + sell);
+            m_num = (int)dr["Number"];
+            m_name = (string)dr["Name"];
+            m_need = (int)dr["Need"];
+            m_reward = (int)dr["Reward"];
         }
     }
 }

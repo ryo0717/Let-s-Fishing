@@ -1,6 +1,4 @@
 ﻿//マップの処理を管理するプログラム
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,37 +7,32 @@ public class MapManager : MonoBehaviour
 {
     //place
     //カメラ
-    public GameObject Camera = null;
+    public GameObject cam = null;
     //海岸1
-    public GameObject Coast1 = null;
+    public GameObject coast_first = null;
     //海岸2
-    public GameObject Coast2 = null;
+    public GameObject coast_second = null;
     //海岸3
-    public GameObject Coast3 = null;
+    public GameObject coast_third = null;
     //川
-    public GameObject River = null;
+    public GameObject river = null;
     //船
-    public GameObject Boat = null;
+    public GameObject boat = null;
     //湖
-    public GameObject Lake = null;
+    public GameObject lake = null;
+
+    //地方canvas
+    public GameObject place_parent = null;
 
     //地方
-    public GameObject B = null;
-    public GameObject C = null;
-    public GameObject D = null;
-    public GameObject E = null;
-    public GameObject F = null;
-    public GameObject G = null;
-    public GameObject H = null;
+    public GameObject chugoku_sikoku = null;
+    public GameObject kinki = null;
+    public GameObject chubu = null;
+    public GameObject kanto = null;
+    public GameObject tohoku = null;
+    public GameObject okinawa = null;
+    public GameObject hokkaido = null;
 
-//Position
-    Vector3 C_pos ;
-    Vector3 Coast1_pos ;
-    Vector3 Coast2_pos ;
-    Vector3 Coast3_pos ;
-    Vector3 River_pos ;
-    Vector3 Boat_pos ;
-    Vector3 Lake_pos ;
     //現在のStage数
     public string stage = "";
 
@@ -48,28 +41,18 @@ public class MapManager : MonoBehaviour
     //プレイヤー餌数
     public GameObject feed = null;
     //プレイヤーミッション数
-    public GameObject Mission = null;
+    public GameObject mission = null;
     public int point_num = 0;
     public int feed_num = 0;
     public int place = 0;
-    public string mission = " ";
+    public string mission_name = " ";
     public int mission_num = 0;
     public int target_num = 0;
 
     [SerializeField] 
-    private SoundManager sound_manager = null;
-    // Start is called before the first frame update
+    public SoundManager sound_manager = null;
     void Start()
     {
-        //マップPosition
-        C_pos = Camera.transform.position;
-        Coast1_pos = Coast1.transform.position;
-        Coast2_pos = Coast2.transform.position;
-        Coast3_pos = Coast3.transform.position;
-        River_pos = River.transform.position;
-        Boat_pos = Boat.transform.position;
-        Lake_pos = Lake.transform.position;
-
         //ステージ数の初期化
         stage = PlayerPrefs.GetString("STAGE","A");
         place = PlayerPrefs.GetInt("PLACE",0);
@@ -77,7 +60,7 @@ public class MapManager : MonoBehaviour
         //ポイントとエサとミッションをDBから入力
         point_num = PlayerPrefs.GetInt("POINT",100);
         feed_num = PlayerPrefs.GetInt("FEED",0);
-        mission = PlayerPrefs.GetString("MISSION","");
+        mission_name = PlayerPrefs.GetString("MISSION","");
         mission_num = PlayerPrefs.GetInt("MISSION_NUM",1);
         target_num = PlayerPrefs.GetInt("TARGET_NUM",0);
     }
@@ -85,294 +68,192 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //マップ
-        Camera.transform.position = C_pos;
-        Coast1.transform.position = Coast1_pos;
-        Coast2.transform.position = Coast2_pos;
-        Coast3.transform.position = Coast3_pos;
-        River.transform.position = River_pos;
-        Boat.transform.position = Boat_pos;
-        Lake.transform.position = Lake_pos;
 
         //Playerのミッション数に応じて移動できる場所を解放する
 
-        if(mission_num > 1){
-            Coast1.SetActive(true);
-            Coast2.SetActive(true);
+        if(mission_num > 1)
+        {
+            coast_first.SetActive(true);
+            coast_second.SetActive(true);
         }
-        if(mission_num > 3){
-            Coast3.SetActive(true);
-            B.SetActive(true);
+        if(mission_num > 3)
+        {
+            coast_third.SetActive(true);
+            chugoku_sikoku.SetActive(true);
         }
-        if(mission_num > 6){
-            Lake.SetActive(true);
-            C.SetActive(true);
+        if(mission_num > 6)
+        {
+            lake.SetActive(true);
+            kinki.SetActive(true);
         }
-        if(mission_num > 9){
-            D.SetActive(true);
+        if(mission_num > 9)
+        {
+            chubu.SetActive(true);
         }
-        if(mission_num > 11){
-            Boat.SetActive(true);
-            E.SetActive(true);
+        if(mission_num > 11)
+        {
+            boat.SetActive(true);
+            kanto.SetActive(true);
         }
-        if(mission_num > 13){
-            F.SetActive(true);
+        if(mission_num > 13)
+        {
+            tohoku.SetActive(true);
         }
-        if(mission_num > 15){
-            G.SetActive(true);
+        if(mission_num > 15)
+        {
+            okinawa.SetActive(true);
         }
-        if(mission_num > 17){
-            H.SetActive(true);
+        if(mission_num > 17)
+        {
+            hokkaido.SetActive(true);
         }
 
         
 
 //画面に反映
-        Text P_text = point.GetComponent<Text> ();
-        P_text.text = point_num + "p";
-        Text F_text = feed.GetComponent<Text> ();
-        F_text.text = feed_num.ToString();
-        Text M_text = Mission.GetComponent<Text>();
-        M_text.text = "ミッション：" + mission + "匹 現在" + target_num + "匹";
+        Text p_text = point.GetComponent<Text> ();
+        p_text.text = point_num + "p";
+        Text f_text = feed.GetComponent<Text> ();
+        f_text.text = feed_num.ToString();
+        Text m_text = mission.GetComponent<Text>();
+        m_text.text = "ミッション：" + mission_name + "匹 現在" + target_num + "匹";
 
         
     }
     //地方ごとの表示処理
-    //A地方の場合
-    public void MoveA(){
+
+    //九州地方の場合
+    public void Move_kyushu()
+    {
          //sound
         sound_manager.Button();
         stage = "A";
-        C_pos.x = -78f;
-        C_pos.y = -78f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 188f + 473f;
-        Coast1_pos.y = 180f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = -35f + 473f;
-        Coast2_pos.y = 50f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 103f + 473f;
-        River_pos.y = -57f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(-78f, -78f, -37f);
+        coast_first.transform.localPosition = new Vector3(188f, 180f, 0f);
+        coast_second.transform.localPosition = new Vector3(-35f, 50f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(103f, -57f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //B地方の場合
-    public void MoveB(){
+    //中国・四国地方の場合
+    public void Move_chugoku_sikoku()
+    {
          //sound
         sound_manager.Button();
         stage = "B";
-        C_pos.x = -55f;
-        C_pos.y = -57f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 160f + 473f;
-        Coast1_pos.y = 255f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 24f + 473f;
-        Coast2_pos.y = 18f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 255f + 473f;
-        Coast3_pos.y = -150f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 500f + 473f;
-        River_pos.y = 500f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(-55f, -57f, -37f);
+        coast_first.transform.localPosition = new Vector3(160f, 184f, 0f);
+        coast_second.transform.localPosition = new Vector3(24f, 18f, 0f);
+        coast_third.transform.localPosition = new Vector3(214f, -126f ,0f);
+        river.transform.localPosition = new Vector3(500f, 500f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //C地方の場合
-    public void MoveC(){
+    //近畿地方の場合
+    public void Move_kinki()
+    {
          //sound
         sound_manager.Button();
         stage = "C";
-        C_pos.x = -25f;
-        C_pos.y = -47f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 180f + 473f;
-        Coast1_pos.y = -150f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 500f + 473f;
-        River_pos.y = 500f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 100f + 473f;
-        Lake_pos.y = 50f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(-25f, -47f, -37f);
+        coast_first.transform.localPosition = new Vector3(180f, -150f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(500f, 500f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(100f, 50f, 0f);
     }
-    //D地方場合
-    public void MoveD(){
+    //中部地方の場合
+    public void Move_chubu()
+    {
          //sound
         sound_manager.Button();
         stage = "D";
-        C_pos.x = -6f;
-        C_pos.y = -34f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 90f + 473f;
-        Coast1_pos.y = 180f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 10f + 473f;
-        River_pos.y = -50f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(-6f, -34f, -37f);
+        coast_first.transform.localPosition = new Vector3(90f, 180f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(10f, -50f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //E地方の場合
-    public void MoveE(){
+    //関東地方の場合
+    public void Move_kanto()
+    {
          //sound
         sound_manager.Button();
         stage = "E";
-        C_pos.x = 12f;
-        C_pos.y = -33f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 250f + 473f;
-        Coast1_pos.y = 30f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 500f + 473f;
-        River_pos.y = 500f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 140f + 473f;
-        Boat_pos.y = -140f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(12f, -33f, -37); 
+        coast_first.transform.localPosition = new Vector3(250f, 30f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(500f, 500f, 0f);
+        boat.transform.localPosition = new Vector3(140f, -140f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //F地方の場合
-    public void MoveF(){
+    //東北地方の場合
+    public void Move_tohoku()
+    {
          //sound
         sound_manager.Button();
         stage = "F";
-        C_pos.x = 28f;
-        C_pos.y = 14f;
-        C_pos.z = -37f;
-        Coast1_pos.x = -35f + 473f;
-        Coast1_pos.y = 50f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 120f + 473f;
-        River_pos.y = -35f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(28f, 14f, -37f);
+        coast_first.transform.localPosition = new Vector3(-35f, 50f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(120f, -35f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //G地方の場合
-    public void MoveG(){
+    //沖縄地方の場合
+    public void Move_okinawa()
+    {
          //sound
         sound_manager.Button();
         stage = "G";
-        C_pos.x = -25f;
-        C_pos.y = -89f;
-        C_pos.z = -37f;
-        Coast1_pos.x = 0f + 473f;
-        Coast1_pos.y = 0f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 500f + 473f;
-        River_pos.y = 500f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 500f + 473f;
-        Boat_pos.y = 500f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(-25f, -89f, -37f);
+        coast_first.transform.localPosition = new Vector3(0f, 0f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(500f, 500f, 0f);
+        boat.transform.localPosition = new Vector3(500f, 500f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
-    //H地方の場合
-    public void MoveH(){
+    //北海道地方の場合
+    public void Move_hokkaido()
+    {
          //sound
         sound_manager.Button();
         stage = "H";
-        C_pos.x = 49f;
-        C_pos.y = 75f;
-        C_pos.z = -47f;
-        Coast1_pos.x = 180f + 473f;
-        Coast1_pos.y = 50f + 295.5f;
-        Coast1_pos.z = 0f;
-        Coast2_pos.x = 500f + 473f;
-        Coast2_pos.y = 500f + 295.5f;
-        Coast2_pos.z = 0f;
-        Coast3_pos.x = 500f + 473f;
-        Coast3_pos.y = 500f + 295.5f;
-        Coast3_pos.z = 0f;
-        River_pos.x = 50f + 473f;
-        River_pos.y = -50f + 295.5f;
-        River_pos.z = 0f;
-        Boat_pos.x = 150f + 473f;
-        Boat_pos.y = -200f + 295.5f;
-        Boat_pos.z = 0f;
-        Lake_pos.x = 500f + 473f;
-        Lake_pos.y = 500f + 295.5f;
-        Lake_pos.z = 0f;
+        cam.transform.localPosition = new Vector3(49f, 75f, -47f);
+        coast_first.transform.localPosition = new Vector3(180f, 50f, 0f);
+        coast_second.transform.localPosition = new Vector3(500f, 500f, 0f);
+        coast_third.transform.localPosition = new Vector3(500f, 500f, 0f);
+        river.transform.localPosition = new Vector3(50f, -50f, 0f);
+        boat.transform.localPosition = new Vector3(150f, -200f, 0f);
+        lake.transform.localPosition = new Vector3(500f, 500f, 0f);
     }
+
     //画面遷移
     //海岸に移動
-    public void MoveCoast(){
+    public void MoveCoastFirst(){
          //sound
         sound_manager.Button();
         place = 1;
-        SceneManager.LoadScene("Coast fishing");
+        SceneManager.LoadScene("Coast first fishing");
     }
-    public void MoveCoast1(){
+    public void MoveCoastSecond(){
          //sound
         sound_manager.Button();
         place = 2;
-        SceneManager.LoadScene("Coast fishing 1");
+        SceneManager.LoadScene("Coast second fishing");
     }
-    public void MoveCoast2(){
+    public void MoveCoastThird(){
          //sound
         sound_manager.Button();
         place = 3;
-        SceneManager.LoadScene("Coast fishing 2");
+        SceneManager.LoadScene("Coast third fishing");
     }
     //川に移動
     public void MoveRiver(){
@@ -401,7 +282,7 @@ public class MapManager : MonoBehaviour
         PlayerPrefs.SetInt ("POINT", point_num);
         PlayerPrefs.SetInt ("FEED", feed_num);
         PlayerPrefs.SetInt ("PLACE", place);
-        PlayerPrefs.SetString("MISSION",mission);
+        PlayerPrefs.SetString("MISSION",mission_name);
         PlayerPrefs.SetInt("TARGET_NUM",target_num);
         PlayerPrefs.Save ();
     }

@@ -1,5 +1,4 @@
 ﻿//釣りの処理を管理するプログラム
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +7,13 @@ public class FishingManager : MonoBehaviour
 { 
     public GameObject point = null;
     public GameObject feed = null;
-    public GameObject Mission = null;
+    public GameObject mission = null;
     //ポイント数
     public int point_num = 0;
     //餌数
     public int feed_num = 0;
     //ミッション名
-    public string mission = " ";
+    public string mission_name = " ";
     //ミッション数
     public int mission_num = 0;
     //ミッションターゲット数
@@ -34,9 +33,9 @@ public class FishingManager : MonoBehaviour
     //釣り時間
     private int hit_time = 0; 
     //魚がいつhitするかの変数
-    private int Rand_hit = 0;
+    private int rand_hit = 0;
     //魚がhitしている時間の長さ
-    private int Hit_Range = 0;
+    private int hit_range = 0;
     //魚がhitしているか
     private bool is_hit = false;
 
@@ -49,9 +48,9 @@ public class FishingManager : MonoBehaviour
     //浮き
     public GameObject flo = null;
     //釣りをするボタン
-    public GameObject fishing_Btn = null;
+    public GameObject fishing_btn = null;
     //釣りあげるボタン
-    public GameObject no_fishing_Btn = null;
+    public GameObject no_fishing_btn = null;
     //釣りメニュー
     public GameObject fishend = null;
     //魚の画像object
@@ -71,7 +70,7 @@ public class FishingManager : MonoBehaviour
 
     //Sound
     [SerializeField] 
-    private SoundManager sound_manager = null;
+    public SoundManager sound_manager = null;
 
     void Start()
     {
@@ -81,7 +80,7 @@ public class FishingManager : MonoBehaviour
         feed_num = PlayerPrefs.GetInt("FEED",10);
         place = PlayerPrefs.GetInt("PLACE",0);
         stage = PlayerPrefs.GetString("STAGE","A");
-        mission = PlayerPrefs.GetString("MISSION","");
+        mission_name = PlayerPrefs.GetString("MISSION","");
         mission_num = PlayerPrefs.GetInt("MISSION_NUM",1);
         target = PlayerPrefs.GetString("TARGET","");
         target_num = PlayerPrefs.GetInt("TARGET_NUM",0);
@@ -109,17 +108,17 @@ public class FishingManager : MonoBehaviour
     void Update()
     {
         //画面に反映
-        Text P_text = point.GetComponent<Text> ();
-        P_text.text = point_num + "p";
-        Text F_text = feed.GetComponent<Text> ();
-        F_text.text = feed_num.ToString();
-        Text M_text = Mission.GetComponent<Text>();
-        M_text.text = "ミッション：" + mission + "匹 現在" + target_num + "匹";
+        Text p_text = point.GetComponent<Text> ();
+        p_text.text = point_num + "p";
+        Text f_text = feed.GetComponent<Text> ();
+        f_text.text = feed_num.ToString();
+        Text m_text = mission.GetComponent<Text>();
+        m_text.text = "ミッション：" + mission_name + "匹 現在" + target_num + "匹";
 
         //釣りをしている間
         if(hit_time > 0){
             //魚がHitした場合
-            if(Rand_hit > hit_time && Rand_hit-Hit_Range < hit_time){
+            if(rand_hit > hit_time && rand_hit-hit_range < hit_time){
                 //Hit文字を表示
                 hitter.SetActive(true);
                 //魚がHitしている
@@ -150,7 +149,7 @@ public class FishingManager : MonoBehaviour
         PlayerPrefs.SetInt ("POINT", point_num);
         PlayerPrefs.SetInt ("FEED", feed_num);
         PlayerPrefs.SetString ("STAGE", stage);
-        PlayerPrefs.SetString("MISSION",mission);
+        PlayerPrefs.SetString("MISSION",mission_name);
         PlayerPrefs.SetInt ("MISSION_NUM", mission_num);
         PlayerPrefs.SetString("TARGET",target);
         PlayerPrefs.SetInt("TARGET_NUM",target_num);
@@ -176,13 +175,13 @@ public class FishingManager : MonoBehaviour
             //浮きの表示
             flo.SetActive(true);
             //釣りをするボタンの非表示
-            fishing_Btn.SetActive(false);
+            fishing_btn.SetActive(false);
             //釣りあげるボタンの表示
-            no_fishing_Btn.SetActive(true);
+            no_fishing_btn.SetActive(true);
             //釣りをする時間の設定
             hit_time = 500;
             //魚がHitするタイミングをランダムで決める
-            Rand_hit = Random.Range(100,400);
+            rand_hit = Random.Range(100,400);
             //どの魚が釣れるかランダムで決める
             fish_index = Random.Range(0, fish_name.Count);
             //魚の画像をセット
@@ -191,15 +190,15 @@ public class FishingManager : MonoBehaviour
 
             //釣れる難易度の判定
             if(difficulty[fish_index] == 0){
-                Hit_Range = 100;
+                hit_range = 100;
             }else if(difficulty[fish_index] == 1){
-                Hit_Range = 90;
+                hit_range = 90;
             }else if(difficulty[fish_index] == 2){
-                Hit_Range = 80;
+                hit_range = 80;
             }else if(difficulty[fish_index] == 3){
-                Hit_Range = 70;
+                hit_range = 70;
             }else{
-                Hit_Range = 60;
+                hit_range = 60;
             }
             
         }
@@ -232,9 +231,9 @@ public class FishingManager : MonoBehaviour
         //浮きの非表示
         flo.SetActive(false);
         //釣りをするボタンの表示
-        fishing_Btn.SetActive(true);
+        fishing_btn.SetActive(true);
         //釣り上げるボタンの非表示
-        no_fishing_Btn.SetActive(false);
+        no_fishing_btn.SetActive(false);
         //Hit文字の非表示
         hitter.SetActive(false);
         

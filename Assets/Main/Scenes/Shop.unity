@@ -1923,13 +1923,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 1817132302}
   feed: {fileID: 1817132301}
-  Mission: {fileID: 1817132300}
+  mission: {fileID: 1817132300}
   point_num: 0
   feed_num: 0
   mission_num: 0
   target_num: 0
   target: ' '
-  mission: ' '
+  mission_name: ' '
   sound_manager: {fileID: 157982282}
 --- !u!4 &1498808449
 Transform:

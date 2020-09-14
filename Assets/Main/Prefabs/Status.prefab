@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6813698900423158232}
   - component: {fileID: 1491337040777972598}
   m_Layer: 5
-  m_Name: "\u6240\u6301\uFF502"
+  m_Name: point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 204184833905662742}
   - component: {fileID: 5749949324488142739}
   m_Layer: 5
-  m_Name: "\u6240\u6301\u30A8\u30B52"
+  m_Name: feed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 7876371514894304654}
   - component: {fileID: 6671450275456262779}
   m_Layer: 5
-  m_Name: "\u30DF\u30C3\u30B7\u30E7\u30F3"
+  m_Name: mission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 6687680460175819006}
   - component: {fileID: 6687680460175819007}
   m_Layer: 5
-  m_Name: "\u6240\u6301\uFF50"
+  m_Name: point head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 1772468513227748694}
   - component: {fileID: 3996496219006077261}
   m_Layer: 5
-  m_Name: "\u6240\u6301\u30A8\u30B5"
+  m_Name: feed head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

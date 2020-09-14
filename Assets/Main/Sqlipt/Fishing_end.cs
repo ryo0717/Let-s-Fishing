@@ -1,15 +1,12 @@
 ﻿//釣りを終了するメニューを管理するプログラム
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Fishing_end : MonoBehaviour
 {
     public GameObject fishend = null;
     [SerializeField] 
-    private SoundManager sound_manager = null;
+    public SoundManager sound_manager = null;
 
 //タイトルに戻る
     public void MoveTitle(){
@@ -26,7 +23,7 @@ public class Fishing_end : MonoBehaviour
         SceneManager.LoadScene("Shop");
     }
 //ゲームに戻る
-    public void act_end_No(){
+    public void Not_act_end(){
         //Soundを流す
         sound_manager.Button();
         //ゲームメニューを閉じる

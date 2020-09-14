@@ -1101,6 +1101,21 @@ PrefabInstance:
       propertyPath: sound_manager
       value: 
       objectReference: {fileID: 716587892}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: mission
+      value: 
+      objectReference: {fileID: 1970513539}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: fishing_btn
+      value: 
+      objectReference: {fileID: 1620871441}
+    - target: {fileID: 182514288930310319, guid: 23d0886af34bf2143b92e15068434cff,
+        type: 3}
+      propertyPath: no_fishing_btn
+      value: 
+      objectReference: {fileID: 595037968}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d0886af34bf2143b92e15068434cff, type: 3}
 --- !u!1 &1970513539 stripped
